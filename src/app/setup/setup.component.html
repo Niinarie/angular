@@ -1,0 +1,7 @@
+ <h1>This is setup</h1>
+ <p>Enter the number of bus stop:</p>
+
+ <form #f="ngForm" (ngSubmit)="searchStops()">
+ <input type="text" [(ngModel)]="stop" name="stop" required>
+ <button type="submit" [disabled]="!f.valid">Search</button>
+ </form>
