@@ -21,7 +21,12 @@ export class RoutesComponent implements OnInit {
    }
 
   splicePositions = (positions: Array<Object>) => {
+
+    // check if there are any objects in positions array
+    // if there are, splice the array so we only get info for one bus
+      if (positions.length > 0) {
       positions.length = 1;
+      }
       return positions;
   }
 
@@ -29,6 +34,8 @@ export class RoutesComponent implements OnInit {
           var vehicles: Array<Object> = [];
             Object.keys(positions).forEach(function(id){
               Object.keys(positions[id]).forEach(function(it){
+
+                //make an array out of position info
                 var vehicle = positions[id][it];
                 vehicles.push(vehicle);
               });
@@ -45,6 +52,9 @@ export class RoutesComponent implements OnInit {
           this.dataInfo = res.data.stops[0].patterns;
           this.stopInfo = res.data.stops[0];
 
+          // go through every route and get location info
+          // for each
+
          for (let i = 0, l = this.dataInfo.length; i < l; i++) {
 
             this.digitransit.getPosition(this.dataInfo[i].route.gtfsId)
@@ -53,9 +63,17 @@ export class RoutesComponent implements OnInit {
             let positions = this.sortPositions(res);
             positions = this.splicePositions(positions);
 
-            this.dataInfo[i].lat = positions[0]['lat'];
-            this.dataInfo[i].long = positions[0]['long'];
-            console.log(this.dataInfo[i].lat);
+            // check if there are any objects in positions array, if there are
+            // put the position info to the object
+            if (positions.length > 0) {
+              this.dataInfo[i].isActive = true;
+              this.dataInfo[i].lat = positions[0]['lat'];
+              this.dataInfo[i].long = positions[0]['long'];
+            } else {
+              this.dataInfo[i].isActive = false;
+            }
+            console.log(this.dataInfo[i].isActive );
+
             });
           }
         });

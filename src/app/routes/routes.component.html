@@ -2,9 +2,11 @@ routes works!
 
 <div *ngIf="dataInfo">
   <ul *ngFor="let data of dataInfo">
-        <li>
-        <a href="https://maps.google.fi/maps/place/{{data.lat}}+{{data.long}}"> <h5>{{data.name}}</h5><br></a>
-      <!--  lat: {{data.lat }} <br>
-        long: {{data.long}}   --> </li> 
+        <li *ngIf="data.isActive">
+          <a href="https://maps.google.fi/maps/place/{{data.lat}}+{{data.long}}"> <h5>{{data.name}}</h5></a>
+        </li>
+        <li *ngIf="data.isActive == false">
+          <h5>{{data.name}}</h5>
+        </li> 
   </ul>
 </div>
