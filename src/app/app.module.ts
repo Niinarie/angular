@@ -1,6 +1,6 @@
 import { DigitransitService } from './services/digitransit.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -14,7 +14,7 @@ const routeConfig = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'setup/'
+    component: SetupComponent
   },
   {
     path: 'setup',

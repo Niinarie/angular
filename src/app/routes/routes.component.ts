@@ -17,20 +17,8 @@ export class RoutesComponent implements OnInit {
   private positionInfo: Array<Object> = [];
 
   constructor(private digitransit: DigitransitService, private router: Router, private route: ActivatedRoute) {
-    //this.router.navigate(['routes']);
+    // this.router.navigate(['routes']);
    }
-
-      getPositionById = (id: string) => {
-    let positionForBus;
-    this.digitransit.getPosition(id)
-    .subscribe(
-      (response: Array<any>) => {
-      positionForBus = this.sortPositions(response)
-      positionForBus = this.splicePositions(positionForBus);
-      console.log(positionForBus);
-      return positionForBus;
-        });
-  }
 
   splicePositions = (positions: Array<Object>) => {
       positions.length = 1;
@@ -38,7 +26,7 @@ export class RoutesComponent implements OnInit {
   }
 
   sortPositions = (positions) => {
-            var vehicles: Array<Object> = [];
+          var vehicles: Array<Object> = [];
             Object.keys(positions).forEach(function(id){
               Object.keys(positions[id]).forEach(function(it){
                 var vehicle = positions[id][it];
@@ -46,7 +34,7 @@ export class RoutesComponent implements OnInit {
               });
             });
             return vehicles;
-          }
+  }
 
   ngOnInit() {
     this.route.params
@@ -65,22 +53,11 @@ export class RoutesComponent implements OnInit {
             let positions = this.sortPositions(res);
             positions = this.splicePositions(positions);
 
-            this.dataInfo[i].lat = positions;
-            this.dataInfo[i].long = positions;
-            console.log(positions);
+            this.dataInfo[i].lat = positions[0]['lat'];
+            this.dataInfo[i].long = positions[0]['long'];
+            console.log(this.dataInfo[i].lat);
             });
-    }
-
-        // 'HSL:2235N'
-
-
-        /*  for (let i = 0, l = this.dataInfo.length; i < l; i++) {
-
-            let id = this.dataInfo[i].route.gtfsId;
-            this.dataInfo[i].lat = landl.lat;
-            this.dataInfo[i].long = landl.long;
-
-          } */
+          }
         });
 
   }

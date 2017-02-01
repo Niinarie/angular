@@ -35,9 +35,8 @@ export class DigitransitService {
     getPosition = (routeName: string) => {
       const re = /(HSL:)(\d\S+)/;
       let route = routeName.match(re);
-      //console.log(route[2]);
-       return this.http.get('http://api.digitransit.fi/realtime/vehicle-positions/v1/hfp/journey/+/+/'+route[2]+'/')
-       .map(resp => resp.json());
+      return this.http.get('http://api.digitransit.fi/realtime/vehicle-positions/v1/hfp/journey/+/+/'+route[2]+'/')
+      .map(resp => resp.json());
      }
 
 
