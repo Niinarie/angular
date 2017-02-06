@@ -1,4 +1,15 @@
-routes works!
+<div id="userinfo" *ngIf="userData.name || userData.address || userData.number">
+  Nimi: {{userData.name}}<br>
+  Numero: {{userData.number}}
+  <br>
+  Osoite: {{userData.address}}
+</div>
+<br>
+
+<div *ngIf="fav">
+  <button (click)="searchFavourite(fav)">Search favourite stop: {{fav}}</button>
+</div>
+<br>
 
 <div *ngIf="dataInfo">
   <ul *ngFor="let data of dataInfo">

@@ -15,10 +15,17 @@ export class RoutesComponent implements OnInit {
   private dataInfo: any;
   private stopInfo: any;
   private positionInfo: Array<Object> = [];
+  private userData: Object = {};
+  private fav;
 
   constructor(private digitransit: DigitransitService, private router: Router, private route: ActivatedRoute) {
     // this.router.navigate(['routes']);
    }
+
+    searchFavourite(fav: string) {
+    console.log(fav);
+    this.router.navigate(['routes', JSON.parse(fav)]);
+  }
 
   splicePositions = (positions: Array<Object>) => {
 
@@ -44,6 +51,11 @@ export class RoutesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userData['name'] = localStorage.getItem('name');
+    this.userData['address'] = localStorage.getItem('address');
+    this.userData['number'] = localStorage.getItem('number');
+    this.fav = localStorage.getItem('favourite');
+
     this.route.params
     .switchMap((params: Params) =>
     this.digitransit.getRoutes(params['stop']))

@@ -1,7 +1,27 @@
- <h1>This is setup</h1>
+<div>
+     <h1>This is setup</h1>
  <p>Enter the number of bus stop:</p>
 
  <form #f="ngForm" (ngSubmit)="searchStops()">
  <input type="text" [(ngModel)]="stop" name="stop" required>
  <button type="submit" [disabled]="!f.valid">Search</button>
+
  </form>
+
+ <button (click)="saveToFavourites(stop)">Save to favourites</button>
+</div>
+<br>
+
+<div>
+<form #s="ngForm" (ngSubmit)="saveInfo(s.value)">
+    <h4>Personal info:</h4>
+    Name: <input type="text" ngModel name="name" placeholder="name"><br>
+    Address: <input type="text" ngModel name="address" placeholder="address"><br>
+    Phone number: <input type="text" ngModel name="number" placeholder="number"><br>
+    <button type="submit">Save info</button>
+
+</form>
+
+<button (click)="emptyInfo()">Remove personal information</button>
+
+</div>
